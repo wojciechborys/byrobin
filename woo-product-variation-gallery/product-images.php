@@ -27,7 +27,7 @@ $img = get_the_post_thumbnail_url();
 	<?php if(!empty($img)){ ?>
 		<div class="list-item">
 			<div class="media-box has-image">
-				<div class="img-box"><img src="<?php echo $img;?>" alt="<?php the_title();?>"></div>
+				<div class="img-box"><img src="<?php echo $img;?>"></div>
 			</div>
 		</div>
 	<?php

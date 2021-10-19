@@ -234,6 +234,32 @@ $copyright_text = get_field('copyright_text', 'option');
 </div><!-- #page -->
 
 <?php wp_footer(); ?>
+<script>
+	/*cart popup script start*/
+
+
+	$(document).on('keyup click', function (e) {
+		var close = $('.cartPopup .close-btn');
+		if($(e.target).is('.cart-trigger') || $(e.target).is('.cart-trigger img')) {
+			$('body').addClass('cartPopup-open');
+			$('body').addClass('popupOpen');
+		}
+		if (e.keyCode === 27) {
+			if($('body').hasClass('cartPopup-open')) {
+			$('body').removeClass('cartPopup-open');
+			$('body').removeClass('popupOpen');
+			}
+		} /*else if (close.is(e.target)) {
+			$('body').removeClass('cartPopup-open');
+			$('body').removeClass('popupOpen');
+		}*/
+		$(close).click(function() {
+			$('body').removeClass('cartPopup-open');
+			$('body').removeClass('popupOpen');
+		})
+	})
+	/*cart popup script end*/
+</script>
 
 </body>
 </html>

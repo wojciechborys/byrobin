@@ -8,10 +8,6 @@ $(document).ready(function () {
   jQuery('<div class="searchPopup-trigger"><a>search</a></div>').insertBefore(".menuTrigger");
   jQuery('<div class="close-btn"> <svg xmlns="http://www.w3.org/2000/svg" width="11.016" height="11.016" viewBox="0 0 11.016 11.016"> <g id="Group_Copy" data-name="Group Copy" transform="translate(10.23 0.786) rotate(90)"> <path id="Stroke_6992" data-name="Stroke 6992" d="M0,0,9.444,9.444" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.111"></path> <path id="Stroke_6993" data-name="Stroke 6993" d="M0,9.444,9.444,0" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.111"></path> </g> </svg> </div>').insertBefore(".wpmm-main-wrap-menu-1 > .searchPopup-trigger");
 
-
-
-
-
   var menuTrigger = $('.wp-megamenu-wrap .menuTrigger');
   var menuCloseTrigger = $('.wp-megamenu-wrap .close-btn');
 
@@ -243,10 +239,6 @@ $(document).ready(function () {
   /*shopfilter popup script start*/
   globlePopup('.filterPopup-trigger', '.shoFilterPopup .close-btn', 'shoFilterPopup-open');
   /*shopfilter popup script end*/
-
-  /*cart popup script start*/
-  globlePopup('.cart-trigger', '.cartPopup .close-btn', 'cartPopup-open');
-  /*cart popup script end*/
 
   /*account popup script start*/
   globlePopup('.accountPopup-trigger', '.accountPopup .close-btn', 'accountPopup-open');
