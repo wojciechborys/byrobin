@@ -4132,7 +4132,40 @@ display: flex;
    transform: translate(-50%, -50%);
 } */
 
+.upsells h2 {
+  font-size: 16px;
+  text-transform: uppercase;
+  line-height: 1.28;
+}
 
+.single-product .galleryList {
+  display: block;
+  grid-template-columns: inherit;
+  grid-column-gap: inherit;
+  grid-row-gap: inherit;
+  position: relative;
+}
+
+.single-product .galleryList .swiper-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .single-product .galleryList .swiper-wrapper {
+    display: flex;
+    grid-template-columns: initial;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+  }
+}
+
+.wp-megamenu-sub-menu {
+  background-color: white !important;
+}
 
 .shopgallery-main,
 .summary-wrap {

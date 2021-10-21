@@ -23,15 +23,20 @@ if($img_gallery)exit;
 	
 $img = get_the_post_thumbnail_url();
 ?>
-<div class="galleryList" id="gallery-img">
-	<?php if(!empty($img)){ ?>
-		<div class="list-item">
+<div class="galleryList swiper-container swiper-images" id="gallery-img">
+	<div class="swiper-wrapper">
+		<?php if(!empty($img)){ ?>
+		<div class="list-item swiper-slide">
 			<div class="media-box has-image">
 				<div class="img-box"><img src="<?php echo $img;?>"></div>
 			</div>
+			<div class="swiper-pagination"></div>
 		</div>
-	<?php
-	}
-	get_product_gallery_images();
-?>
+
+	<?php }
+		get_product_gallery_images();
+	?> 
+
+</div>
+
 </div>

@@ -45,7 +45,6 @@ $(document).ready(function () {
   });
   $('body').on('blur', '.form-row .input-text', function () {
     if (!$(this).val()) {
-      console.log(5);
       jQuery(this).closest(".form-row").removeClass("filled");
     } else {
       jQuery(this).closest(".form-row").addClass("filled");
@@ -228,6 +227,10 @@ $(document).ready(function () {
   })
   /*search popup script end*/
 
+  /*sizeguidPopupp script start*/
+  globlePopup('.size-guide', '.sizeguidPopup .close-btn', 'sizeguidPopup-open', 'loginPopup-open');
+  /*sizeguidPopupp script end*/
+
   /*login popup script start*/
   globlePopup('.loginPopup-trigger > a, .registerPopup .login-trigger', '.loginPopup .close-btn', 'loginPopup-open', 'registerPopup-open');
   /*login popup script end*/
@@ -247,11 +250,6 @@ $(document).ready(function () {
   /*forgotPass popup script start*/
   globlePopup('.forgotPass-trigger', '.forgotPassPopup .close-btn', 'forgotPassPopup-open', 'loginPopup-open');
   /*forgotPass popup script end*/
-
-  /*sizeguidPopupp script start*/
-  globlePopup('.size-guide', '.sizeguidPopup .close-btn', 'sizeguidPopup-open', 'loginPopup-open, shopMenuPopup-open');
-  /*sizeguidPopupp script end*/
-
 
 
 
@@ -417,6 +415,21 @@ $(document).ready(function () {
   }
   /*popup menu hover script end*/
 
+  if ($(window).width() < 768) {
+    var swiper = new Swiper(".swiper-images", {
+      pagination: {
+        el: ".swiper-pagination",
+        type: "fraction",
+      },
+
+      slidesPerView: 1,
+
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev",
+      },
+    });
+  }
 
 });
 /*ready stage end*/
@@ -435,4 +448,3 @@ $(window).on("resize", function (event) {
   $('body').css('width', $(this).width() + 'px');
 
 });
-

@@ -445,6 +445,88 @@ function shop_menu_shortcode_fun() {
 }
 /****  SHOP MENU  ***/
 
+
+/**** SHOP MENU COLLECTIONS  ****/
+add_shortcode('collections_menu_shortcode', 'collections_menu_shortcode_fun');
+
+function collections_menu_shortcode_fun() {
+    if (is_admin())
+        return;
+    ob_start();
+	
+	$category_section = get_field('category_section_coll', 'option');
+	$collection_image = get_field('collection_image_coll', 'option');
+	$collection_link = get_field('collection_link_coll', 'option');
+	$shop_cta_button = get_field('shop_cta_button_coll', 'option');
+	    
+	?>
+	 <!-- shopMenu popup start -->
+		<div class="shopMenuPopup">
+			<div class="popup-wrap">
+				<!-- <div class="close-btn">
+					<svg xmlns="http://www.w3.org/2000/svg" width="11.016" height="11.016" viewBox="0 0 11.016 11.016">
+						<g id="Group_Copy" data-name="Group Copy" transform="translate(10.23 0.786) rotate(90)">
+							<path id="Stroke_6992" data-name="Stroke 6992" d="M0,0,9.444,9.444" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.111"/>
+							<path id="Stroke_6993" data-name="Stroke 6993" d="M0,9.444,9.444,0" fill="none" stroke="#666" stroke-linecap="round" stroke-linejoin="round" stroke-miterlimit="10" stroke-width="1.111"/>
+						</g>
+					</svg>
+				</div> -->
+				<div class="menu-wrap">
+					<?php 
+						if(!empty($category_section)){
+							echo '<div class="hoverMenu">
+									<div class="hoverMenu-list">
+										<ul>';
+							foreach($category_section as $cs_key => $cs_value){
+								$product_category = $cs_value['product_category'];							
+								$category_relevant_image = $cs_value['category_relevant_image'];
+								if(!empty($product_category) && !empty($category_relevant_image)){
+					?>
+								<li>
+									<a href="<?php echo get_term_link($product_category->term_id);?>"><?php echo $product_category->name;?></a>
+									<div class="subContent">
+										<div class="img-box" style="background-image: url(<?php echo $category_relevant_image['url'];?>);"> </div>
+									</div>
+								</li>
+					<?php
+								}
+							}
+							echo '</ul>
+								</div>';
+								
+							if(!empty($shop_cta_button)){	
+								$target = $shop_cta_button['target'];
+								if(empty($target))
+									$target = '_self';
+								echo '<div class="heading"><a href="'.$shop_cta_button['url'].'" target="'.$target.'>">'.$shop_cta_button['title'].'</a></div>';
+							}
+							echo '</div>';
+						}
+						
+						if(!empty($collection_image) && !empty($collection_link)){
+							$target = $collection_link['target'];
+							if(empty($target))
+								$target = '_self';
+					?>
+					<div class="menuCollection">
+						<div class="imgHeading">
+							<a href="<?php echo $collection_link['url'];?>" target="<?php echo $target;?>"><div class="img-box" style="background-image: url(<?php echo $collection_image['url'];?>);"></div></a>
+							<div class="heading"><a href="<?php echo $collection_link['url'];?>" target="<?php echo $target;?>"><?php echo $collection_link['title'];?></a></div>
+						</div>
+					</div>
+					<?php }?>
+				</div>
+				
+			</div>
+		</div>
+		<!-- shopMenu popup end -->
+	
+	<?php
+    
+    return ob_get_clean();
+}
+/****  SHOP MENU  ***/
+
 add_action('after_setup_theme', 'mytheme_add_woocommerce_support', 99);
 function mytheme_add_woocommerce_support() {
     add_theme_support('woocommerce');
@@ -1268,16 +1350,16 @@ function get_product_gallery_images(){
 				$video_file = $pg_value['video_file'];
 				$embed_script = $pg_value['embed_script'];
 	?>
-			<div class="list-item">
+			<div class="list-item swiper-slide">
 				<div class="media-box has-video">				
 					<div class="video-box">
 						<?php if($video_type == 'file_upload' && !empty($video_file)){?>
-								<div class="upload-video">
-									<video poster="<?php echo $img;?>" autoplay="" loop="" muted>
-										<source src="<?php echo $video_file['url'];?>">
-										<p class="warning">Your browser does not support HTML5 video.</p>
-									</video>
-								</div>
+							<div class="upload-video">
+								<video poster="<?php echo $img;?>" autoplay="" loop="" muted>
+									<source src="<?php echo $video_file['url'];?>">
+									<p class="warning">Your browser does not support HTML5 video.</p>
+								</video>
+							</div>
 						<?php 
 							}elseif($video_type == 'youtube' && !empty($embed_script)){
 								echo '<div class="youtube-video">'.$embed_script.'</div>';					
@@ -1287,17 +1369,20 @@ function get_product_gallery_images(){
 						?>
 					</div>
 				</div>
+				<div class="swiper-pagination"></div>
 			</div>
 	<?php
-			}else{
+			} else {
 				$image = $pg_value['image'];
 				if(!empty($image)){
 	?>
-				<div class="list-item">
+				<div class="list-item swiper-slide">
 					<div class="media-box has-image">
 						<div class="img-box"><img src="<?php echo $image['url'];?>" alt="<?php echo $image['alt'];?>"></div>
 					</div>
+					<div class="swiper-pagination"></div>
 				</div>
+				
 	<?php
 				}
 			}
@@ -1389,4 +1474,10 @@ function woocommerce_header_add_to_cart_fragment( $fragments ) {
 	$fragments['div.cart-box'] = ob_get_clean();
 	
 	return $fragments;
+}
+
+add_filter( 'woocommerce_product_upsells_products_heading', 'bbloomer_translate_may_also_like' );
+  
+function bbloomer_translate_may_also_like() {
+   return 'RELATED PRODUCTS';
 }
